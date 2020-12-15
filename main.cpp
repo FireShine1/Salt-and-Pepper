@@ -42,15 +42,13 @@ int main() {
                     (float) pixel.Red * 0.11f + (float) pixel.Green * 0.59f + (float) pixel.Blue * 0.3f;
         }
 
-    //for (int i = 0; i < iterations; i++) {
-		clock_t time;
-		time = clock();
-        MedianFilterCPU(res_cpu, colours, height, width);
-		time = clock() - time;
-    //}
-    //for (int i = 0; i < iterations; i++) {
-        MedianFilterGPU(res_gpu, colours, height, width);
-    //}
+	clock_t time;
+	time = clock();
+    MedianFilterCPU(res_cpu, colours, height, width);
+	time = clock() - time;
+
+    MedianFilterGPU(res_gpu, colours, height, width);
+
 	printf("CPU time: %.1f ms\n", time * 1000.0 / CLOCKS_PER_SEC);
 
     writeResultImage(&result_image_cpu, 1, res_cpu, height, width);
